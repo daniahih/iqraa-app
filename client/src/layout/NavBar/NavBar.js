@@ -36,7 +36,7 @@ const NavBar = () => {
             </form>
           </div>
           <div className="col-span-3 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center ">
-            <NavLink to="/">Books</NavLink>
+            <NavLink to="/books">Books</NavLink>
             <NavLink to="/aboutus" className={Hover}>
               About Us
             </NavLink>

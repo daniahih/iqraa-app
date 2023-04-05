@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import AboutUs from "./screens/AboutUs";
 import NotFound from "./screens/NotFound";
 import Layout from "./layout/layout";
+import Books from "./screens/Books";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +18,10 @@ const Router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs />,
+      },
+      {
+        path: "/books",
+        element: <Books />,
       },
       {
         path: "*",
