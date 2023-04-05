@@ -7,6 +7,7 @@ import NotFound from "./screens/NotFound";
 import Layout from "./layout/layout";
 
 import BooksPage from "./screens/Books";
+import SingleBook from "./screens/singleBook";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +24,10 @@ const Router = createBrowserRouter([
       {
         path: "/books",
         element: <BooksPage />,
+      },
+      {
+        path: "/book/:id",
+        element: <SingleBook />,
       },
       {
         path: "*",

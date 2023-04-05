@@ -5,7 +5,7 @@ import { AiFillHeart } from "react-icons/ai";
 function Book({ book }) {
   return (
     <div className="border border-border p-1 relative rounded overflow-hidden transition-all duration-300 transform hover:translate-y-1 hover:shadow-lg">
-      <Link to={`/books/${book?.title}`} className="w-full">
+      <Link to={`/book/${book?.title}`} className="w-full">
         <img
           src={`/imges/Books/${book?.image}`}
           alt={book?.title}
