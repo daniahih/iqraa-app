@@ -28,15 +28,15 @@ function Footer() {
       title: "Top Categories",
       links: [
         {
-          name: "Business and finance:",
+          name: "Fantasy",
           link: "#",
         },
         {
-          name: "Health and wellness",
+          name: "Motivational",
           link: "#",
         },
         {
-          name: "Philosophy",
+          name: "Historical",
           link: "#",
         },
         {
