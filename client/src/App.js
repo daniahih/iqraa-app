@@ -8,6 +8,7 @@ import Layout from "./layout/layout";
 
 import BooksPage from "./screens/Books";
 import SingleBook from "./screens/singleBook";
+import Login from "./screens/Login";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,14 @@ const Router = createBrowserRouter([
       {
         path: "/book/:id",
         element: <SingleBook />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Login />,
       },
       {
         path: "*",
