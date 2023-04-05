@@ -9,6 +9,8 @@ export const Books = [
     language: "English",
     rate: 4.5,
     reviews: 20,
+    description:
+      "The books chronicle Harry's adventures as he learns to master his magical abilities, discovers his connection to the evil Lord Voldemort, and battles against his dark forces to save the wizarding world. Along the way, he encounters a wide array of magical creatures, learns about the history of magic, and forms lasting friendships and alliances",
   },
   {
     title: "Rich dad poor dad",
@@ -20,6 +22,8 @@ export const Books = [
     language: "English",
     rate: 4.5,
     reviews: 70,
+    description:
+      "The book emphasizes the importance of financial education and financial independence, and encourages readers to think outside the box when it comes to building wealth. It includes advice on topics such as building assets, investing in real estate, and starting a business, as well as insights into the mindset of successful entrepreneurs and investors",
   },
   {
     title: "Bilal code",
