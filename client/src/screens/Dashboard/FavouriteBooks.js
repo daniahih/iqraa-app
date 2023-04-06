@@ -1,12 +1,12 @@
 import React from "react";
 import SideBar from "./SideBar";
 import Table from "../../components/Table";
-import Book from "../../components/Book";
+
 import { Books } from "../../Data/BookData";
 
 function FavouriteBooks() {
   return (
-    <>
+    <div className="bg-main">
       <SideBar>
         <div className="flex flex-col gap-6">
           <div className="flex-btn gap-2 ">
@@ -18,7 +18,7 @@ function FavouriteBooks() {
           <Table data={Books} admin={false} />
         </div>
       </SideBar>
-    </>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ import SideBar from "../SideBar";
 
 function BooksList() {
   return (
-    <>
+    <div className="bg-main">
       <SideBar>
         <div className="flex flex-col gap-6">
           <div className="flex-btn gap-2 ">
@@ -18,7 +18,7 @@ function BooksList() {
           <Table data={Books} admin={true} />
         </div>
       </SideBar>
-    </>
+    </div>
   );
 }
 

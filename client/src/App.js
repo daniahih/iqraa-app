@@ -14,6 +14,10 @@ import Profile from "./screens/Dashboard/Profile";
 import Password from "./screens/Dashboard/Password";
 import FavouriteBooks from "./screens/Dashboard/FavouriteBooks";
 import BooksList from "./screens/Dashboard/Admin/BooksList";
+import DashBoard from "./screens/Dashboard/Admin/DashBoard";
+import Categories from "./screens/Dashboard/Admin/Categories";
+import Users from "./screens/Dashboard/Admin/Users";
+
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -43,18 +47,7 @@ const Router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
-      {
-        path: "/password",
-        element: <Password />,
-      },
-      {
-        path: "/favourite",
-        element: <FavouriteBooks />,
-      },
-      {
-        path: "/bookslist",
-        element: <BooksList />,
-      },
+
       {
         path: "*",
         element: <NotFound />,
@@ -64,6 +57,30 @@ const Router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/password",
+    element: <Password />,
+  },
+  {
+    path: "/favourite",
+    element: <FavouriteBooks />,
+  },
+  {
+    path: "/bookslist",
+    element: <BooksList />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoard />,
+  },
+  {
+    path: "/categories",
+    element: <Categories />,
+  },
+  {
+    path: "/users",
+    element: <Users />,
   },
 ]);
 

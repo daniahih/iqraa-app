@@ -1,11 +1,11 @@
 import React from "react";
 import SideBar from "./SideBar";
-import Update from "../../components/Update";
+
 import { Input } from "../../components/UsedInput";
 
 function Password() {
   return (
-    <>
+    <div className="bg-main">
       <SideBar>
         <div className=" flex flex-col gap-6 ">
           <h1 className="text-xl font-bold"> Change Password </h1>
@@ -35,7 +35,7 @@ function Password() {
           </div>
         </div>
       </SideBar>
-    </>
+    </div>
   );
 }
 
