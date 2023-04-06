@@ -17,6 +17,7 @@ import BooksList from "./screens/Dashboard/Admin/BooksList";
 import DashBoard from "./screens/Dashboard/Admin/DashBoard";
 import Categories from "./screens/Dashboard/Admin/Categories";
 import Users from "./screens/Dashboard/Admin/Users";
+import AddBook from "./screens/Dashboard/Admin/AddBook";
 
 const Router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const Router = createBrowserRouter([
   {
     path: "/users",
     element: <Users />,
+  },
+  {
+    path: "/addbook",
+    element: <AddBook />,
   },
 ]);
 
