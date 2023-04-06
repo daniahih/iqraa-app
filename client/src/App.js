@@ -11,6 +11,7 @@ import SingleBook from "./screens/singleBook";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Profile from "./screens/Dashboard/Profile";
+import Password from "./screens/Dashboard/Password";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +40,10 @@ const Router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/password",
+        element: <Password />,
       },
       {
         path: "*",
