@@ -22,7 +22,7 @@ function Login() {
         ></Input>
         <Link
           to="/dashboard"
-          className=" bg-star transtions hover:bg:main flex-rows gap-4 text-white w-full border h-10 border-border"
+          className=" bg-star transtions hover:bg-main flex-rows gap-4 text-white w-full border h-10 border-border"
         >
           <FaSignInAlt /> login
         </Link>

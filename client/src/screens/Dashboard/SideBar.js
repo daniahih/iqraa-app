@@ -69,7 +69,9 @@ function SideBar({ children }) {
             </NavLink>
           ))}
         </div>
-        <div className="col-span-6 rounded-md bg-dry border-border text-white"></div>
+        <div className="col-span-6 rounded-md bg-dry border-border text-white">
+          {children}
+        </div>
       </div>
     </div>
   );
