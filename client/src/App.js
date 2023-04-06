@@ -10,6 +10,7 @@ import BooksPage from "./screens/Books";
 import SingleBook from "./screens/singleBook";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
+import Profile from "./screens/Dashboard/Profile";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +45,10 @@ const Router = createBrowserRouter([
         element: <NotFound />,
       },
     ],
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 
