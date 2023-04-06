@@ -12,6 +12,7 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Profile from "./screens/Dashboard/Profile";
 import Password from "./screens/Dashboard/Password";
+import FavouriteBooks from "./screens/Dashboard/FavouriteBooks";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +45,10 @@ const Router = createBrowserRouter([
       {
         path: "/password",
         element: <Password />,
+      },
+      {
+        path: "/favourite",
+        element: <FavouriteBooks />,
       },
       {
         path: "*",
