@@ -13,6 +13,7 @@ import Register from "./screens/Register";
 import Profile from "./screens/Dashboard/Profile";
 import Password from "./screens/Dashboard/Password";
 import FavouriteBooks from "./screens/Dashboard/FavouriteBooks";
+import BooksList from "./screens/Dashboard/Admin/BooksList";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,10 @@ const Router = createBrowserRouter([
       {
         path: "/favourite",
         element: <FavouriteBooks />,
+      },
+      {
+        path: "/bookslist",
+        element: <BooksList />,
       },
       {
         path: "*",
