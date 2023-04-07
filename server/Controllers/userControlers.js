@@ -1,9 +1,9 @@
-const asyncHandler = require("express-async-handler");
 const User = require("../Models/UserModels");
+const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../middleware/Auth");
 //@desc Register  Users
-//@route GET /api/Users
+//@route post  /api/Users
 //@access public
 const RegisterUser = asyncHandler(async (req, res) => {
   const { fullName, email, password, image } = req.body;
@@ -38,8 +38,37 @@ const RegisterUser = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Invalied user ");
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+// post method
+const LoginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // find the user in the db
+    const user = await User.findOne({ email });
+    // check the user is exists and if the user exists compare the password
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.json({
+        _id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        image: user.image,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+      // if theres a user but theres an error in password
+    } else {
+      res.status(401);
+      throw new Error("Invalid email or Password ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 module.exports = {
   RegisterUser,
+  LoginUser,
 };
