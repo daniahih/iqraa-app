@@ -100,8 +100,39 @@ const UpdateUser = asyncHandler(async (req, res) => {
   }
 });
 
+const DeleteProfile = asyncHandler(async (req, res) => {
+  try {
+    //find the user in the database
+    const user = await User.findById(req.user._id);
+    console.log(user);
+    //if the user exists remove from db
+    if (user) {
+      // if the user is admin
+      if (user.isAdmin) {
+        res.status(400);
+        throw new Error("Cant delete Admin user ");
+      }
+      await User.deleteOne({ _id: user._id });
+      res.json({ massage: "user deleated succesfuly " });
+
+      // delete the user from the db
+    } else {
+      res.status(404);
+      throw new Error("user not found ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const GetUsers = asyncHandler(async (req, res) => {
+  const users = await User.find();
+  res.status(200).json(users);
+});
 module.exports = {
   RegisterUser,
   LoginUser,
   UpdateUser,
+  DeleteProfile,
+  GetUsers,
 };
