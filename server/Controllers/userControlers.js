@@ -68,7 +68,40 @@ const LoginUser = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+//updata user profile
+//put method
+const UpdateUser = asyncHandler(async (req, res) => {
+  const { fullName, email, image } = req.body;
+  try {
+    // find the user in the database
+    const user = await User.findById(req.user._id);
+    // if the user exists update the user and save it to database
+    if (user) {
+      user.fullName = fullName || user.fullName;
+      user.email = email || user.email;
+      user.image = image || user.image;
+      const updatedUser = await user.save();
+      // send the updated user to client
+      res.json({
+        _id: updatedUser._id,
+        fullName: updatedUser.fullName,
+        email: updatedUser.email,
+        image: updatedUser.image,
+        isAdmin: updatedUser.isAdmin,
+        token: generateToken(updatedUser._id),
+      });
+    } else {
+      res.status(401);
+      throw new Error("User not found");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = {
   RegisterUser,
   LoginUser,
+  UpdateUser,
 };
