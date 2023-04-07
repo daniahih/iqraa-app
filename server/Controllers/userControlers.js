@@ -129,10 +129,32 @@ const GetUsers = asyncHandler(async (req, res) => {
   const users = await User.find();
   res.status(200).json(users);
 });
+const changedUserPassword = asyncHandler(async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  try {
+    // find the user in database
+    const user = await User.findById(req.user._id);
+    // if the user exists now i want to compare the old password with the hashed password then upsate the password
+    if (user && (await bcrypt.compare(oldPassword, user.password))) {
+      //hash new password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+      user.password = hashedPassword;
+      await user.save();
+      res.json({ massage: "password changed sucessfully" });
+    } else {
+      res.status(401);
+      throw new Error("Invalid old password ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 module.exports = {
   RegisterUser,
   LoginUser,
   UpdateUser,
   DeleteProfile,
   GetUsers,
+  changedUserPassword,
 };
