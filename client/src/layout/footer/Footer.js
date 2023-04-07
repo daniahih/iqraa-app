@@ -95,12 +95,11 @@ function Footer() {
           ))}
           <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
             <Link to="/">
-              {/* <img
-                src="imges\logo.png"
+              <img
+                src="logo.png"
                 alt="logo"
                 className="w-full h-20 object-contain"
-              /> */}
-              EQRA'
+              />
             </Link>
             <span>
               <p className="leading-7 text-sm text-white mt-5">Address</p>
