@@ -7,7 +7,9 @@ app.use(cors());
 const connectDb = require("./Config/dbConnection");
 connectDb();
 const userRouter = require("./Routes/UserRouter");
+const booksRouter = require("./Routes/BookRouter");
 const errorHandler = require("./middleware/errorHandler");
+
 app.use(express.json());
 // main route
 app.get("/", (req, res) => {
@@ -15,6 +17,7 @@ app.get("/", (req, res) => {
 });
 //other route
 app.use("/api/users", userRouter);
+app.use("/api/books", booksRouter);
 app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

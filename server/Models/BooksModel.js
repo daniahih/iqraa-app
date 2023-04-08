@@ -44,11 +44,19 @@ const BooksSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    bigimg: {
+      type: String,
+      required: true,
+    },
     image: {
       type: String,
       required: true,
     },
     category: {
+      type: String,
+      required: true,
+    },
+    emotion: {
       type: String,
       required: true,
     },
