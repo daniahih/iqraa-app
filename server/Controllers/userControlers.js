@@ -176,7 +176,7 @@ const addLikedBook = asyncHandler(async (req, res) => {
       // check if book already liked
 
       // if book already exists
-      if (user.likedBooks.include(bookId)) {
+      if (user.likedBooks.includes(bookId)) {
         res.status(401);
         throw new Error(" Book already liked ");
       }
