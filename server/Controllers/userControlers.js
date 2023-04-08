@@ -150,6 +150,79 @@ const changedUserPassword = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+const getLikedBooks = asyncHandler(async (req, res) => {
+  try {
+    //find the user in db
+    const user = await User.findById(req.user._id).populate("likedBooks");
+    console.log(user);
+    // if the user exists send liked bokks to the client
+    if (user) {
+      res.json(user.likedBooks);
+    } else {
+      res.status(404);
+      throw new Error(" user not fonud ");
+    }
+  } catch {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const addLikedBook = asyncHandler(async (req, res) => {
+  const { bookId } = req.body;
+  try {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      // check if book already liked
+
+      // if book already exists
+      if (user.likedBooks.include(bookId)) {
+        res.status(401);
+        throw new Error(" Book already liked ");
+      }
+      // else add the book to the favourite book
+      user.likedBooks.push(bookId);
+      await user.save();
+      res.json({ massage: "book added to favourite list" });
+    } else {
+      res.status(404);
+      throw new Error(" Book not fonud ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+const deletedLikedBooks = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      user.likedBooks = [];
+      await user.save();
+      res.json({ massage: " liked books deleted successfully " });
+    } else {
+      res.status(404);
+      throw new Error(" Book not fonud ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      if (user.isAdmin) {
+        res.status(400);
+        throw new Error(" cant delete admin user ");
+      }
+      await User.deleteOne({ _id: user._id });
+      res.json({ massage: " user deleted successfuly " });
+    } else {
+      res.status(404);
+      throw new Error(" Book not fonud ");
+    }
+  } catch (error) {}
+});
 module.exports = {
   RegisterUser,
   LoginUser,
@@ -157,4 +230,8 @@ module.exports = {
   DeleteProfile,
   GetUsers,
   changedUserPassword,
+  getLikedBooks,
+  addLikedBook,
+  deletedLikedBooks,
+  deleteUser,
 };
