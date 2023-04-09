@@ -160,6 +160,67 @@ const deleteBook = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+// delete all books
+// DELETE method
+const deleteAllBooks = asyncHandler(async (req, res) => {
+  try {
+    await Book.deleteMany({});
+    res.json({ massage: "all books removed " });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const createBook = asyncHandler(async (req, res) => {
+  try {
+    // get the data from request body
+    const {
+      title,
+      Author,
+      PublicationData,
+      bigimg,
+      image,
+      category,
+      emotion,
+      language,
+      rate,
+      numberOfReviews,
+      description,
+      pdf,
+    } = req.body;
+    // create a new book
+
+    const book = new Book({
+      title,
+      Author,
+      PublicationData,
+      bigimg,
+      image,
+      category,
+      emotion,
+      language,
+      rate,
+      numberOfReviews,
+      description,
+      pdf,
+      userId: req.user._id,
+    });
+    // save the book to db
+    if (book) {
+      const createdBook = await book.save();
+      res.status(201).json(createdBook);
+    } else {
+      res.status(400);
+      throw new Error(" invalid book data ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// create book
+// post method
 module.exports = {
   importBooks,
   getBooks,
@@ -167,4 +228,6 @@ module.exports = {
   createBookReview,
   updateBook,
   deleteBook,
+  deleteAllBooks,
+  createBook,
 };
