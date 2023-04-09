@@ -74,7 +74,7 @@ const BooksSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    rewiews: [reviweSchema],
+    reviews: [reviweSchema],
     description: {
       type: String,
     },
