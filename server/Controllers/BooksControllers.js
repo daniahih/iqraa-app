@@ -145,10 +145,26 @@ const updateBook = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteBook = asyncHandler(async (req, res) => {
+  try {
+    // find the book in the db
+    const book = await Book.findById(req.params.id);
+    if (book) {
+      await Book.deleteOne({ _id: req.params.id });
+      res.json({ massage: "book removed" });
+    } else {
+      res.status(404);
+      throw new Error("book not found");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 module.exports = {
   importBooks,
   getBooks,
   getBookById,
   createBookReview,
   updateBook,
+  deleteBook,
 };

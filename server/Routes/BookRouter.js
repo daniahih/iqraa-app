@@ -8,6 +8,7 @@ const {
   getBookById,
   createBookReview,
   updateBook,
+  deleteBook,
 } = require("../Controllers/BooksControllers");
 
 router.route("/import").post(importBooks);
@@ -19,5 +20,6 @@ router.route("/:id/reviews").post(protect, createBookReview);
 
 // admin router
 router.route("/:id").put(protect, updateBook);
+router.route("/:id").delete(protect, deleteBook);
 
 module.exports = router;
