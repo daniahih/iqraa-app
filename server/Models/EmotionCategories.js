@@ -10,3 +10,5 @@ const EmotionSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+module.exports = mongoose.model("Emotion", EmotionSchema);
