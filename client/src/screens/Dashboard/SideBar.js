@@ -31,6 +31,11 @@ function SideBar({ children }) {
       icon: HiViewGridAdd,
     },
     {
+      name: "Emotion ",
+      link: "/emotion",
+      icon: HiViewGridAdd,
+    },
+    {
       name: "Users",
       link: "/users",
       icon: FaUserAlt,

@@ -5,6 +5,7 @@ import { Input, Massage, Select } from "../../../components/UsedInput";
 import Update from "../../../components/Update";
 import { CategoriesData } from "../../../Data/CategoriesData";
 import { ImUpload } from "react-icons/im";
+import { emotionData } from "../../../Data/emotionData";
 
 function AddBook() {
   return (
@@ -49,6 +50,9 @@ function AddBook() {
           <Massage label="Book Summary" placeholder="make it short "></Massage>
           <div className=" text-sm w-full ">
             <Select label="Book Category" options={CategoriesData}></Select>
+          </div>
+          <div className=" text-sm w-full ">
+            <Select label="Book emotion" options={emotionData}></Select>
           </div>
         </div>
         <div className="flex justify-end items-center my-4">

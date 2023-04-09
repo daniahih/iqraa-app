@@ -15,7 +15,7 @@ function FavouriteBooks() {
               Delete All
             </button>
           </div>
-          <Table data={Books} admin={false} />
+          <Table data={Books} admin={true} />
         </div>
       </SideBar>
     </div>
