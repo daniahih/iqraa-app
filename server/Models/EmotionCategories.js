@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const CategoriesSchema = mongoose.Schema(
+const EmotionSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -10,4 +10,3 @@ const CategoriesSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("Categories", CategoriesSchema);
