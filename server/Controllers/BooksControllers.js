@@ -102,9 +102,53 @@ const createBookReview = asyncHandler(async (req, res) => {
   }
 });
 
+const updateBook = asyncHandler(async (req, res) => {
+  try {
+    // get the data from request body
+    const {
+      title,
+      Author,
+      PublicationData,
+      bigimg,
+      image,
+      category,
+      emotion,
+      language,
+      rate,
+      numberOfReviews,
+      description,
+      pdf,
+    } = req.body;
+    // find the boom in the db
+    const book = await Book.findById(req.params.id);
+    if (book) {
+      // update the book data
+      book.title = title || book.title;
+      book.Author = Author || book.Author;
+      book.PublicationData = PublicationData || book.PublicationData;
+      book.bigimg = bigimg || book.bigimg;
+      book.image = image || book.image;
+      book.category = category || book.category;
+      book.emotion = emotion || book.emotion;
+      book.language = language || book.language;
+      book.rate = rate || book.rate;
+      book.numberOfReviews = numberOfReviews || book.numberOfReviews;
+      book.description = description || book.description;
+      book.pdf = pdf || book.pdf;
+    }
+    // save the book in the database
+    const updatedBook = await book.save();
+    // send  the updated book to the client
+    res.status(201).json(updatedBook);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = {
   importBooks,
   getBooks,
   getBookById,
   createBookReview,
+  updateBook,
 };
