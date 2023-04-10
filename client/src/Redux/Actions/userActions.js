@@ -100,6 +100,17 @@ const getLikedBooksAction = () => async (dispatch, getState) => {
     ErrorsAction(error, dispatch, userConstants.USER_GET_LIKED_BOOKS_FAIL);
   }
 };
+// delete all liked books action
+const deleteLikedBooksAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.DELETE_ALL_FAVORITES_REQUEST });
+    await userApi.deleteAllLikedBooksService(tokenProtection(getState));
+    dispatch({ type: userConstants.DELETE_ALL_FAVORITES_SUCCESS });
+    toast.success("All Favorites Deleted ");
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.DELETE_ALL_FAVORITES_FAIL);
+  }
+};
 export {
   LoginAction,
   registerAction,
@@ -108,4 +119,5 @@ export {
   deleteProfileAction,
   changePasswordAction,
   getLikedBooksAction,
+  deleteLikedBooksAction,
 };

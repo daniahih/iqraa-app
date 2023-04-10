@@ -42,7 +42,7 @@ const Rows = (book, i, admin) => {
                 <AiOutlineCloudDownload />
               </button>
               <Link
-                to={`/book/${book.name}`}
+                to={`/book/${book?._id}`}
                 className="bg-star text-white rounded flex-colo w-6 h-6 "
               >
                 <GoEye />

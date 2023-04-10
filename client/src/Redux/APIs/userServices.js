@@ -69,7 +69,7 @@ const getLikedBooksService = async (token) => {
 
 // user delete all favorites movies Function
 const deleteAllLikedBooksService = async (token) => {
-  const { data } = await Axios.delete("/users/favorites", {
+  const { data } = await Axios.delete("/users/favourite", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
