@@ -50,3 +50,19 @@ export const updateProfileReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// DELETE PROFILE
+export const userDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.USER_DELETE_REQUEST:
+      return { isLoading: true };
+    case userConstants.USER_DELETE_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case userConstants.USER_DELETE_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.USER_DELETE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

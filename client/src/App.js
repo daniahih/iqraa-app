@@ -23,6 +23,7 @@ import ToastContainer from "./components/notifiations/ToastContainer";
 
 const Router = createBrowserRouter([
   {
+    // public route
     path: "/",
     element: <Layout />,
     children: [
@@ -57,6 +58,7 @@ const Router = createBrowserRouter([
       },
     ],
   },
+  //private  routes
   {
     path: "/profile",
     element: <Profile />,
@@ -69,6 +71,7 @@ const Router = createBrowserRouter([
     path: "/favourite",
     element: <FavouriteBooks />,
   },
+  //admin route
   {
     path: "/bookslist",
     element: <BooksList />,

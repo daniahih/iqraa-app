@@ -36,4 +36,24 @@ const updateProfileService = async (user, token) => {
   }
   return data;
 };
-export { registerService, logOutService, loginService, updateProfileService };
+
+// delete user profile Function
+const deleteProfileService = async (token) => {
+  const { data } = await Axios.delete("/users", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (data) {
+    localStorage.removeItem("userInfo");
+  }
+  return data;
+};
+
+export {
+  registerService,
+  logOutService,
+  loginService,
+  updateProfileService,
+  deleteProfileService,
+};

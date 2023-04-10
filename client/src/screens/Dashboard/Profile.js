@@ -3,19 +3,25 @@ import SideBar from "./SideBar";
 import Update from "../../components/Update";
 import { Input } from "../../components/UsedInput";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProfileValidation } from "../../components/validation/UserValidation";
-import { updateProfileAction } from "../../Redux/Actions/userActions";
+import {
+  deleteProfileAction,
+  updateProfileAction,
+} from "../../Redux/Actions/userActions";
 import { toast } from "react-hot-toast";
 import { InlineError } from "./../../components/notifiations/Error";
 function Profile() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { userInfo } = useSelector((state) => state.userLogin);
   const { isLoading, isError, isSuccess } = useSelector(
     (state) => state.userUpdateProfile
+  );
+  const { isLoading: deleteLoading, isError: deleteError } = useSelector(
+    (state) => state.userDeleteProfile
   );
 
   const {
@@ -31,6 +37,11 @@ function Profile() {
     console.log({ ...data });
     dispatch(updateProfileAction({ ...data }));
   };
+  // delete Profile
+  const deleteProfile = () => {
+    window.confirm("Are you sure you want to delete your profile?") &&
+      dispatch(deleteProfileAction());
+  };
   useEffect(() => {
     if (userInfo) {
       setValue("fullName", userInfo.fullName);
@@ -39,10 +50,10 @@ function Profile() {
     if (isSuccess) {
       dispatch({ type: "USER_UPDATE_PROFILE_RESET" });
     }
-    if (isError) {
+    if (isError || deleteError) {
       toast.error(isError);
     }
-  }, [userInfo, isSuccess, isError, dispatch, setValue]);
+  }, [userInfo, isSuccess, isError, dispatch, setValue, deleteError]);
   return (
     <div className="bg-main">
       <SideBar>
@@ -78,10 +89,17 @@ function Profile() {
             {errors.email && <InlineError message={errors.email.message} />}
           </div>
           <div className="flex-btn gap-2 flex-wrap flex-col-reverse sm:flex-row justify-between items-center my-4 ">
-            <button className="bg-star transtions hover:bg-main flex-rows gap-4 py-3 px-6  text-white border h-10 border-border rounded ">
-              Delete Acount
+            <button
+              disabled={deleteLoading || isLoading}
+              onClick={deleteProfile}
+              className="bg-star transtions hover:bg-main flex-rows gap-4 py-3 px-6  text-white border h-10 border-border rounded "
+            >
+              {deleteLoading ? "Deleting..." : "Delete Profile"}
             </button>
-            <button className="bg-star transtions hover:bg-main flex-rows gap-4 py-3 px-6  text-white border h-10 border-border rounded ">
+            <button
+              disabled={deleteLoading || isLoading}
+              className="bg-star transtions hover:bg-main flex-rows gap-4 py-3 px-6  text-white border h-10 border-border rounded "
+            >
               {isLoading ? "Updating..." : "Update Profile"}
             </button>
           </div>
