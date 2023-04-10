@@ -51,7 +51,7 @@ function Profile() {
       dispatch({ type: "USER_UPDATE_PROFILE_RESET" });
     }
     if (isError || deleteError) {
-      toast.error(isError);
+      toast.error(isError || deleteError);
     }
   }, [userInfo, isSuccess, isError, dispatch, setValue, deleteError]);
   return (

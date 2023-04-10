@@ -12,11 +12,15 @@ const LoginAction = (datas) => async (dispatch) => {
     ErrorsAction(error, dispatch, userConstants.USER_LOGIN_FAIL);
   }
 };
-const registerAction = (datas) => async (dispatch) => {
+// register action
+const registerAction = (data) => async (dispatch) => {
   try {
     dispatch({ type: userConstants.USER_REGISTER_REQUEST });
-    const response = await userApi.registerService(datas);
-    dispatch({ type: userConstants.USER_REGISTER_SUCCESS, payload: response });
+    const response = await userApi.registerService(data);
+    dispatch({
+      type: userConstants.USER_REGISTER_SUCCESS,
+      payload: response,
+    });
     dispatch({ type: userConstants.USER_LOGIN_SUCCESS, payload: response });
   } catch (error) {
     ErrorsAction(error, dispatch, userConstants.USER_REGISTER_FAIL);
@@ -64,10 +68,27 @@ const deleteProfileAction = () => async (dispatch, getState) => {
     ErrorsAction(error, dispatch, userConstants.USER_DELETE_FAIL);
   }
 };
+// change password action
+const changePasswordAction = (passwords) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_CHANGE_PASSWORD_REQUEST });
+    const response = await userApi.changePasswordService(
+      passwords,
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.USER_CHANGE_PASSWORD_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.USER_CHANGE_PASSWORD_FAIL);
+  }
+};
 export {
   LoginAction,
   registerAction,
   logoutAction,
   updateProfileAction,
   deleteProfileAction,
+  changePasswordAction,
 };

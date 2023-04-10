@@ -10,24 +10,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { RegisterValidation } from "../components/validation/UserValidation";
 import { useForm } from "react-hook-form";
 
-function Register() {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, isError, userInfo, isSuccess } = useSelector(
+  const { userInfo, isLoading, isError, isSuccess } = useSelector(
     (state) => state.userRegister
   );
-
-  // validate user
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(RegisterValidation) });
+  } = useForm({
+    resolver: yupResolver(RegisterValidation),
+  });
 
-  //on submit
   const onSubmit = (data) => {
-    debugger;
-    console.log(data);
     dispatch(registerAction(data));
   };
 
@@ -38,14 +35,13 @@ function Register() {
       navigate("/profile");
     }
     if (isSuccess) {
-      toast.success(`welcome  ${userInfo?.fullName}`);
-      dispatch({ type: "USER_REGISTER_RESET" });
+      toast.success(`Welcome ${userInfo?.fullName} `);
     }
     if (isError) {
       toast.error(isError);
       dispatch({ type: "USER_REGISTER_RESET" });
     }
-  }, [userInfo, isSuccess, isError, navigate, dispatch]);
+  }, [userInfo, isSuccess, dispatch, navigate, isError]);
   return (
     <div className=" container mx-auto px-2 my-24 flex-colo">
       <form
@@ -112,4 +108,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

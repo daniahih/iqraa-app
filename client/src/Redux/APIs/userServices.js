@@ -1,15 +1,12 @@
 import Axios from "./Axios";
-// register new user API CALL
+// Register a new user API call
 const registerService = async (user) => {
-  console.log("user", user);
   const { data } = await Axios.post("/users", user);
-
   if (data) {
     localStorage.setItem("userInfo", JSON.stringify(data));
   }
   return data;
 };
-
 //logout user function
 const logOutService = () => {
   localStorage.removeItem("userInfo");
@@ -50,10 +47,20 @@ const deleteProfileService = async (token) => {
   return data;
 };
 
+// change user password Function
+const changePasswordService = async (passwords, token) => {
+  const { data } = await Axios.put("/users/password", passwords, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
 export {
   registerService,
   logOutService,
   loginService,
   updateProfileService,
   deleteProfileService,
+  changePasswordService,
 };

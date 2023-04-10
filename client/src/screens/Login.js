@@ -41,8 +41,9 @@ function Login() {
       toast.success(`welcome back ${userInfo?.fullName}`);
     }
     if (isError) {
-      toast.error(isError);
+      // toast.error(isError);
       dispatch({ type: "USER_LOGIN_RESET" });
+      toast.error("invaild email or password ");
     }
   }, [userInfo, isSuccess, isError, navigate, dispatch]);
   return (
