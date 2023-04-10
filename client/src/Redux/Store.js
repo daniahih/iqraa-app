@@ -8,6 +8,8 @@ const rootReducer = combineReducers({
   userUpdateProfile: User.updateProfileReducer,
   userDeleteProfile: User.userDeleteReducer,
   userChangePassword: User.userChangePasswordReducer,
+  userGetLikedBooks: User.userGetLikedBooksReducer,
+  deleteLikedBooks: User.userDeleteLikedBooksReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBar from "./SideBar";
 import Table from "../../components/Table";
 
 import { Books } from "../../Data/BookData";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { getLikedBooksAction } from "../../Redux/Actions/userActions";
+import Loader from "../../components/notifiations/Loader";
 
 function FavouriteBooks() {
+  const dispatch = useDispatch();
+  const { isLoading, isError, likedBooks } = useSelector(
+    (state) => state.userGetLikedBooks
+  );
+
+  useEffect(() => {
+    // get all liked Books
+    dispatch(getLikedBooksAction());
+    if (isError) {
+      toast.error(isError);
+      dispatch({
+        type: "USER_GET_LIKED_BOOKS_RESET",
+      });
+    }
+  }, [dispatch, isError]);
   return (
     <div className="bg-main">
       <SideBar>
@@ -15,7 +34,13 @@ function FavouriteBooks() {
               Delete All
             </button>
           </div>
-          <Table data={Books} admin={true} />
+          {isLoading ? (
+            <Loader />
+          ) : likedBooks?.length > 0 ? (
+            <Table data={likedBooks} admin={false} />
+          ) : (
+            <p>empty</p>
+          )}
         </div>
       </SideBar>
     </div>

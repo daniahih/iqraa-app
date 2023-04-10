@@ -85,3 +85,42 @@ export const userChangePasswordReducer = (state = {}, action) => {
       return state;
   }
 };
+//  get favourite Books
+export const userGetLikedBooksReducer = (
+  state = {
+    likedBooks: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case userConstants.USER_GET_LIKED_BOOKS_REQUEST:
+      return { isLoading: true };
+    case userConstants.USER_GET_LIKED_BOOKS_SUCCESS:
+      return { isLoading: false, likedBooks: action.payload };
+    case userConstants.USER_GET_LIKED_BOOKS_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.USER_GET_LIKED_BOOKS_RESET:
+      return { likedBooks: [] };
+    default:
+      return state;
+  }
+};
+
+//  delete all favourite books
+export const userDeleteLikedBooksReducer = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.DELETE_ALL_FAVORITES_REQUEST:
+      return { isLoading: true };
+    case userConstants.DELETE_ALL_FAVORITES_SUCCESS:
+      return {
+        isLoading: false,
+        isSuccess: true,
+      };
+    case userConstants.DELETE_ALL_FAVORITES_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.DELETE_ALL_FAVORITES_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

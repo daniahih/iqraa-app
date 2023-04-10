@@ -84,6 +84,22 @@ const changePasswordAction = (passwords) => async (dispatch, getState) => {
     ErrorsAction(error, dispatch, userConstants.USER_CHANGE_PASSWORD_FAIL);
   }
 };
+
+// get all liked movies action
+const getLikedBooksAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_GET_LIKED_BOOKS_REQUEST });
+    const response = await userApi.getLikedBooksService(
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.USER_GET_LIKED_BOOKS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.USER_GET_LIKED_BOOKS_FAIL);
+  }
+};
 export {
   LoginAction,
   registerAction,
@@ -91,4 +107,5 @@ export {
   updateProfileAction,
   deleteProfileAction,
   changePasswordAction,
+  getLikedBooksAction,
 };
