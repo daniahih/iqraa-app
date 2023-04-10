@@ -1,7 +1,7 @@
 import * as userConstants from "../Constants/userConstants";
 import * as userApi from "../APIs/userServices";
-// import toast from "react-hot-toast";
-import { ErrorsAction } from "../Protection";
+import toast from "react-hot-toast";
+import { ErrorsAction, tokenProtection } from "../Protection";
 // login Action
 const LoginAction = (datas) => async (dispatch) => {
   try {
@@ -30,4 +30,26 @@ const logoutAction = () => (dispatch) => {
   dispatch({ type: userConstants.USER_LOGIN_RESET });
   dispatch({ type: userConstants.USER_REGISTER_RESET });
 };
-export { LoginAction, registerAction, logoutAction };
+
+// update profile action
+const updateProfileAction = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_UPDATA_PROFILE_REQUEST });
+    const response = await userApi.updateProfileService(
+      user,
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.USER_UPDATA_PROFILE_SUCCESS,
+      payload: response,
+    });
+    toast.succes("profile updated ");
+    dispatch({
+      type: userConstants.USER_LOGIN_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.USER_UPDATA_PROFILE_FAIL);
+  }
+};
+export { LoginAction, registerAction, logoutAction, updateProfileAction };

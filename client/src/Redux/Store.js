@@ -5,6 +5,7 @@ const rootReducer = combineReducers({
   // user reducers
   userLogin: User.userLoginReducer,
   userRegister: User.userRegisterReducer,
+  userUpdateProfile: User.updateProfileReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
@@ -12,6 +13,7 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 //initialState
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  // userRegister: { userInfo: userInfoFromStorage },
 };
 export const store = configureStore({
   reducer: rootReducer,

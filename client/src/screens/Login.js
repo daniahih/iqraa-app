@@ -26,6 +26,8 @@ function Login() {
 
   //on submit
   const onSubmit = (data) => {
+    debugger;
+    console.log(data);
     dispatch(LoginAction(data));
   };
 

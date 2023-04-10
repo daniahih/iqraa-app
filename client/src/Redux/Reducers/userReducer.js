@@ -27,8 +27,23 @@ export const userRegisterReducer = (state = {}, action) => {
       return { isLoading: false, userInfo: action.payload, isSuccess: true };
     case userConstants.USER_REGISTER_FAIL:
       return { isLoading: false, isError: action.payload };
-
     case userConstants.USER_REGISTER_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+// update profile
+export const updateProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.USER_UPDATA_PROFILE_REQUEST:
+      return { isLoading: true };
+    case userConstants.USER_UPDATA_PROFILE_SUCCESS:
+      return { isLoading: false, userInfo: action.payload, isSuccess: true };
+    case userConstants.USER_UPDATA_PROFILE_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.USER_UPDATA_PROFILE_RESET:
       return {};
 
     default:

@@ -26,6 +26,8 @@ function Register() {
 
   //on submit
   const onSubmit = (data) => {
+    debugger;
+    console.log(data);
     dispatch(registerAction(data));
   };
 
@@ -88,7 +90,6 @@ function Register() {
 
         <button
           type="submit"
-          onClick={console.log("clicked")}
           disabled={isLoading}
           className=" bg-star transtions hover:bg:main flex-rows gap-4 text-white w-full border h-10 border-border"
         >
