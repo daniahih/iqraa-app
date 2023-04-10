@@ -19,6 +19,7 @@ import Categories from "./screens/Dashboard/Admin/Categories";
 import Users from "./screens/Dashboard/Admin/Users";
 import AddBook from "./screens/Dashboard/Admin/AddBook";
 import Emotion from "./screens/Dashboard/Admin/Emotion";
+import ToastContainer from "./components/notifiations/ToastContainer";
 
 const Router = createBrowserRouter([
   {
@@ -97,6 +98,7 @@ const Router = createBrowserRouter([
 function App() {
   return (
     <div>
+      <ToastContainer />
       <RouterProvider router={Router} />
     </div>
   );
