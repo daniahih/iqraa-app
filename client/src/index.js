@@ -7,6 +7,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "aos";
 import "aos/dist/aos.css";
+import { Provider } from "react-redux";
+import { store } from "./Redux/Store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
