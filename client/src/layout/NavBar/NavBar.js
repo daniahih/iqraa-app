@@ -2,7 +2,9 @@ import { Link, NavLink } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 const NavBar = () => {
+  const { userInfo } = useSelector((state) => state.userLogin);
   const hover = "hover:text-star transtions text-white ";
   const Hover = ({ isActive }) => (isActive ? "text-star" : hover);
   return (
@@ -42,7 +44,16 @@ const NavBar = () => {
             <NavLink to="/contactus" className={Hover}>
               Contact Us
             </NavLink>
-            <NavLink to="/login" className={Hover}>
+            <NavLink
+              to={
+                userInfo?.isAdmin
+                  ? "/dashboard"
+                  : userInfo
+                  ? "/profile"
+                  : "/login"
+              }
+              className={Hover}
+            >
               <CiUser className=" w-6 h-6" />
             </NavLink>
             <NavLink to="/favourite" className={`${Hover} realtive`}>
