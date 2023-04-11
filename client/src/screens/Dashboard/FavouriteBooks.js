@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { getLikedBooksAction } from "../../Redux/Actions/userActions";
 import Loader from "../../components/notifiations/Loader";
 import { deleteLikedBooksAction } from "../../Redux/Actions/userActions";
+import { Empty } from "../../components/notifiations/Empty";
 
 function FavouriteBooks() {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ function FavouriteBooks() {
           ) : likedBooks?.length > 0 ? (
             <Table data={likedBooks} admin={false} />
           ) : (
-            <p>empty</p>
+            <Empty message="You have no favorites books" />
           )}
         </div>
       </SideBar>

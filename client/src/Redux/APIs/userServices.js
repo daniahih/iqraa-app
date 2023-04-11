@@ -76,6 +76,25 @@ const deleteAllLikedBooksService = async (token) => {
   });
   return data;
 };
+
+// admin get all users Function
+const getAllUsersService = async (token) => {
+  const { data } = await Axios.get("/users", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+// admin delete user Function
+const deleteUserByIdService = async (id, token) => {
+  const { data } = await Axios.delete(`/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
 export {
   registerService,
   logOutService,
@@ -85,4 +104,6 @@ export {
   changePasswordService,
   getLikedBooksService,
   deleteAllLikedBooksService,
+  getAllUsersService,
+  deleteUserByIdService,
 };
