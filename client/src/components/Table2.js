@@ -26,7 +26,7 @@ const Rows = ({ data, i, users, OnEditFunction, onDeleteFunction }) => {
           <td className={`${Text}`}>{DateFormat(data?.createdAt)}</td>
           <td className={`${Text}`}> {data.fullName}</td>
           <td className={`${Text}`}> {data.email}</td>
-          <td className={`${Text} float-right flex-row gap-2 `}>
+          <td className={`${Text} float-right flex-rows gap-2`}>
             {!data?.isAdmin && (
               <button
                 onClick={() => onDeleteFunction(data._id)}
@@ -40,18 +40,23 @@ const Rows = ({ data, i, users, OnEditFunction, onDeleteFunction }) => {
       ) : (
         // categories
         <>
-          <td className={`${Text}`}> {data.id ? data.id : "214"}</td>
           <td className={`${Text}`}>
-            {" "}
-            {data.createAt ? data.createAt : "12-jan-2023"}
+            {data?._id ? shortUppercaseId(data?._id) : "2R75T8"}...
           </td>
+          <td className={`${Text}`}>{DateFormat(data?.createdAt)}</td>
           <td className={`${Text}`}> {data.title}</td>
           <td className={`${Text} float-right flex-row gap-2 `}>
             <div className="flex gap-2">
-              <button className=" bg-star text-white rounded flex-colo w-6 h-6  ">
+              <button
+                onClick={() => OnEditFunction(data)}
+                className=" bg-star text-white rounded flex-colo w-6 h-6  "
+              >
                 <AiFillEdit />
               </button>
-              <button className="bg-star text-white rounded flex-colo w-6 h-6 ">
+              <button
+                onClick={() => onDeleteFunction(data._id)}
+                className="bg-star text-white rounded flex-colo w-6 h-6"
+              >
                 <MdDelete />
               </button>
             </div>

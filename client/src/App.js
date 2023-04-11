@@ -18,8 +18,8 @@ import DashBoard from "./screens/Dashboard/Admin/DashBoard";
 import Categories from "./screens/Dashboard/Admin/Categories";
 import Users from "./screens/Dashboard/Admin/Users";
 import AddBook from "./screens/Dashboard/Admin/AddBook";
-import Emotion from "./screens/Dashboard/Admin/Emotion";
 import ToastContainer from "./components/notifiations/ToastContainer";
+import Emotion from "./screens/Dashboard/Admin/Emotion";
 
 const Router = createBrowserRouter([
   {
@@ -84,10 +84,7 @@ const Router = createBrowserRouter([
     path: "/categories",
     element: <Categories />,
   },
-  {
-    path: "/emotion",
-    element: <Emotion />,
-  },
+
   {
     path: "/users",
     element: <Users />,
@@ -95,6 +92,10 @@ const Router = createBrowserRouter([
   {
     path: "/addbook",
     element: <AddBook />,
+  },
+  {
+    path: "/emotion",
+    element: <Emotion />,
   },
 ]);
 

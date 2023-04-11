@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 const NavBar = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { likedBooks } = useSelector((state) => state.userGetLikedBooks);
   const hover = "hover:text-star transtions text-white ";
   const Hover = ({ isActive }) => (isActive ? "text-star" : hover);
   return (
@@ -59,7 +60,7 @@ const NavBar = () => {
             <NavLink to="/favourite" className={`${Hover} realtive`}>
               <FaHeart className=" w-6 h-6" />
               <div className="w-5 h-5 flex-colo rounded-full bg-star text-s text-red absolute top-4 right-11 ">
-                2
+                {likedBooks?.length}
               </div>
             </NavLink>
           </div>

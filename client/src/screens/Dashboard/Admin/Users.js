@@ -3,7 +3,6 @@ import SideBar from "../SideBar";
 
 import Table2 from "../../../components/Table2";
 
-import { UsersData } from "../../../Data/UsersData";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUserAction,
