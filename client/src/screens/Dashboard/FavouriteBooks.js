@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import SideBar from "./SideBar";
 import Table from "../../components/Table";
-
-import { Books } from "../../Data/BookData";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { getLikedBooksAction } from "../../Redux/Actions/userActions";

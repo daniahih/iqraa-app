@@ -107,6 +107,19 @@ const BooksData = [
     description: "",
     pdf: "",
   },
+  {
+    title: "Think and grow rich ",
+    Author: "Napoleon Hill",
+    PublicationData: "1973",
+    bigimg: "4.jpg",
+    image: "5.jpg",
+    category: "self-help, personal development",
+    emotion: "happy",
+    language: "english",
+    rate: 4.5,
+    description: "",
+    pdf: "",
+  },
 ];
 module.exports = {
   BooksData,

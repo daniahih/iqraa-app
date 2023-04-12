@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
@@ -20,6 +20,8 @@ import Users from "./screens/Dashboard/Admin/Users";
 import AddBook from "./screens/Dashboard/Admin/AddBook";
 import ToastContainer from "./components/notifiations/ToastContainer";
 import Emotion from "./screens/Dashboard/Admin/Emotion";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "./Redux/Actions/CategoriesActions";
 
 const Router = createBrowserRouter([
   {
@@ -100,6 +102,11 @@ const Router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
   return (
     <div>
       <ToastContainer />

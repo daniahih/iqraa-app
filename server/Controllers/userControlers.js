@@ -6,7 +6,7 @@ const { generateToken } = require("../middleware/Auth");
 //@route post  /api/Users
 //@access public
 const RegisterUser = asyncHandler(async (req, res) => {
-  const { fullName, email, password, image } = req.body;
+  const { fullName, email, password } = req.body;
   try {
     const userExists = await User.findOne({ email });
     //cheack if the user exists
@@ -22,7 +22,6 @@ const RegisterUser = asyncHandler(async (req, res) => {
       fullName,
       email,
       password: hashedPassword,
-      image,
     });
     // if user created sucessfuly send the user data and token to client side
     if (user) {
@@ -30,8 +29,6 @@ const RegisterUser = asyncHandler(async (req, res) => {
         _id: user._id,
         fullName: user.fullName,
         email: user.email,
-        image: user.image,
-        isAdmin: user.isAdmin,
         token: generateToken(user._id),
       });
     } else {

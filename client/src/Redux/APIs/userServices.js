@@ -7,6 +7,7 @@ const registerService = async (user) => {
   }
   return data;
 };
+
 //logout user function
 const logOutService = () => {
   localStorage.removeItem("userInfo");

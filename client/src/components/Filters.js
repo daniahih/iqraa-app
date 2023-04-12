@@ -1,14 +1,14 @@
-import React, { Fragment, useState } from "react";
-import { CategoriesData } from "../Data/CategoriesData";
+import React, { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { SelectorIcon, CheckIcon } from "@heroicons/react/solid";
+import { useDispatch } from "react-redux";
+import { getAllBooksAction } from "../Redux/Actions/BooksActions";
 
 const Emotion = [
-  { title: "sort by emotion" },
-  { title: "sad" },
-  { title: "happy" },
-  { title: "stress" },
-  { title: "curiosity" },
+  { title: "Depressed" },
+  { title: "Curiosity" },
+  { title: "frustrated" },
+  { title: "nostalgia" },
 ];
 
 const Rate = [
@@ -20,16 +20,27 @@ const Rate = [
   { title: "5 start" },
 ];
 
-function Filters() {
-  const [category, setcategory] = useState({ title: "category" });
+function Filters({ categories, search }) {
+  const dispatch = useDispatch();
+  const [category, setCategory] = useState({
+    title: "All Categories",
+  });
   const [rate, setRate] = useState(Rate[0]);
-  const [emotion, setEmotion] = useState(Emotion[0]);
+  const [emotion, setEmotion] = useState({ title: " All emotions" });
 
   const FiltersData = [
     {
       value: category,
-      onChange: setcategory,
-      items: CategoriesData,
+      onChange: setCategory,
+      items:
+        categories?.length > 0
+          ? [
+              {
+                title: "All Categories",
+              },
+              ...categories,
+            ]
+          : [{ title: "Loading..." }],
     },
     {
       value: rate,
@@ -39,10 +50,30 @@ function Filters() {
     {
       value: emotion,
       onChange: setEmotion,
-      items: Emotion,
+      items:
+        Emotion?.length > 0
+          ? [
+              {
+                title: "All emotions",
+              },
+              ...Emotion,
+            ]
+          : [{ title: "Loading..." }],
     },
   ];
-
+  useEffect(() => {
+    console.log(category, emotion, rate);
+    if (category?.title !== "Loading...") {
+      dispatch(
+        getAllBooksAction({
+          category: category.title === "All Categories" ? "" : category.title,
+          emotion: emotion.title === " All emotions" ? "" : emotion.title,
+          rate: rate.title.replace(/\D/g, ""),
+          search: search ? search : "",
+        })
+      );
+    }
+  }, [category, emotion, dispatch, rate, search]);
   return (
     <div className="my-6 bg-dry border text-dryGray border-gray-800 grid md:grid-cols-4 grid-col-2 lg:gap-12 gap-2 rounded p-6">
       {FiltersData.map((item, index) => (

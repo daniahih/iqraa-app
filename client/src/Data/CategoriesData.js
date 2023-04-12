@@ -1,14 +1,18 @@
 export const CategoriesData = [
   {
     _id: "1",
-    title: "fantasy",
+    title: "historical",
   },
   {
     _id: "2",
-    title: "motivational",
+    title: "Fiction",
   },
   {
     _id: "3",
-    title: "Business and Finance",
+    title: "Relaxation",
+  },
+  {
+    _id: "4",
+    title: "motivational",
   },
 ];
