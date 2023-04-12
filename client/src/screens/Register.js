@@ -56,7 +56,7 @@ function Login() {
             placeholder="yourName"
             type="text"
             name="FullName"
-            register={register("FullName")}
+            register={{ ...register("fullName") }}
             bg={true}
           ></Input>
           {errors.FullName && <InlineError text={errors.FullName.message} />}
@@ -67,7 +67,7 @@ function Login() {
             placeholder="Exaample@gmail.com"
             type="email"
             name="email"
-            register={register("email")}
+            register={{ ...register("email") }}
             bg={true}
           ></Input>
           {errors.email && <InlineError text={errors.email.message} />}
@@ -78,7 +78,7 @@ function Login() {
             placeholder="*****"
             type="password"
             name="password"
-            register={register("password")}
+            register={{ ...register("password") }}
             bg={true}
           ></Input>
           {errors.password && <InlineError text={errors.password.message} />}

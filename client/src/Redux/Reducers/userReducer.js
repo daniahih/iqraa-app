@@ -17,8 +17,7 @@ export const userLoginReducer = (state = {}, action) => {
       return state;
   }
 };
-
-// register
+// REGISTER
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case userConstants.USER_REGISTER_REQUEST:
@@ -29,7 +28,6 @@ export const userRegisterReducer = (state = {}, action) => {
       return { isLoading: false, isError: action.payload };
     case userConstants.USER_REGISTER_RESET:
       return {};
-
     default:
       return state;
   }
