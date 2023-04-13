@@ -13,7 +13,7 @@ function Book({ book }) {
     <div className="border border-border p-1 relative rounded overflow-hidden transition-all duration-300 transform hover:translate-y-1 hover:shadow-lg">
       <Link to={`/book/${book?._id}`} className="w-full">
         <img
-          src={book?.image ? book?.image : `imges/Books/${book.image}`}
+          src={`/imges/Books/${book?.image}`}
           alt={book?.title}
           className="w-full h-64 object-cover"
         />

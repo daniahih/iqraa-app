@@ -1,7 +1,6 @@
 import React from "react";
 import Titles from "../Titles";
 import { BsCollectionFill } from "react-icons/bs";
-import { Books } from "../../Data/BookData";
 import Book from "../Book";
 import Loader from "../notifiations/Loader";
 import { Empty } from "../notifiations/Empty";

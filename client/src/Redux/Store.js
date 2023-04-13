@@ -31,6 +31,8 @@ const rootReducer = combineReducers({
   booksList: Books.BooksListReducer,
   deleteBook: Books.deleteBookReducer,
   deleteAllBooks: Books.deleteAllBooksReducer,
+  bookDetails: Books.bookDetailsReducer,
+  reviewBook: Books.bookReviewReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

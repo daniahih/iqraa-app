@@ -49,3 +49,36 @@ export const deleteAllBooksReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// GET BOOK BY ID
+
+export const bookDetailsReducer = (state = { book: {} }, action) => {
+  switch (action.type) {
+    case BooksConstant.BOOK_DETAILS_REQUEST:
+      return { ...state, isLoading: true };
+    case BooksConstant.BOOK_DETAILS_SUCCESS:
+      return { isLoading: false, book: action.payload };
+    case BooksConstant.BOOK_DETAILS_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case BooksConstant.BOOK_DETAILS_RESET:
+      return { book: {} };
+    default:
+      return state;
+  }
+};
+// REVIEW BOOK
+
+export const bookReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BooksConstant.BOOK_REVIEW_REQUEST:
+      return { isLoading: true };
+    case BooksConstant.BOOK_REVIEW_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case BooksConstant.BOOK_REVIEW_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case BooksConstant.BOOK_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

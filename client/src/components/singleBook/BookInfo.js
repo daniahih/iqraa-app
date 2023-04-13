@@ -1,6 +1,6 @@
 import React from "react";
 
-function BookInfo({ book }) {
+function BookInfo({ book, setModalOpen }) {
   return (
     <div className="w-full xl:h-screen realtive text-white ">
       <div className="xl:bg-main h-full bg-dry flex-colo xl:bg-opacity-90 xl:absolute top-0 right-0 left-0 bottom-0">
@@ -15,20 +15,20 @@ function BookInfo({ book }) {
           <div className="col-span-2 md:grid grid-cols-5 gap-4 items-center">
             <div className="col-span-3 flex flex-col gap-10 ">
               <h1 className="xl:text-4xl capitalize font-sans text-2xl  font-bold ">
-                {book.title}
+                {book?.title}
               </h1>
               <div className="  gap-4 font-medium flex-colo  text-dryGray ">
                 <div className="flex  gap-10">
                   <div className="flex border border-border text-lg px-2 py-1 rounded-sm">
-                    <h1>{book.Author}</h1>
+                    <h1>{book?.Author}</h1>
                   </div>
                   <div className="border border-border text-lg px-2 py-1 rounded-sm">
-                    <h1> {book.category}</h1>
+                    <h1> {book?.category}</h1>
                   </div>
                 </div>
 
                 <p className="text-text text-sm leading-7 ">
-                  {book.description}
+                  {book?.description}
                 </p>
               </div>
             </div>

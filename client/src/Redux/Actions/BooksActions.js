@@ -64,3 +64,37 @@ export const deleteAllBooksAction = () => async (dispatch, getState) => {
     ErrorsAction(error, dispatch, BooksConstant.DELETE_ALL_BOOKS_FAIL);
   }
 };
+
+// get book by id action
+export const getbookByIdAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: BooksConstant.BOOK_DETAILS_REQUEST });
+    const response = await BooksApi.getBookByIdService(id);
+    dispatch({ type: BooksConstant.BOOK_DETAILS_SUCCESS, payload: response });
+  } catch (error) {
+    ErrorsAction(error, dispatch, BooksConstant.BOOK_DETAILS_FAIL);
+  }
+};
+
+// review book action
+export const reviewBookAction =
+  ({ id, review }) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: BooksConstant.BOOK_REVIEW_REQUEST });
+      const response = await BooksApi.reviewBookService(
+        tokenProtection(getState),
+        id,
+        review
+      );
+      dispatch({
+        type: BooksConstant.BOOK_REVIEW_SUCCESS,
+        payload: response,
+      });
+      toast.success(`Review added successfully`);
+      dispatch({ type: BooksConstant.BOOK_REVIEW_RESET });
+      dispatch(getbookByIdAction(id));
+    } catch (error) {
+      ErrorsAction(error, dispatch, BooksConstant.BOOK_REVIEW_FAIL);
+    }
+  };

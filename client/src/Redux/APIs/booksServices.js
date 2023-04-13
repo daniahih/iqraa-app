@@ -32,4 +32,26 @@ const deleteAllBooksService = async (token) => {
   });
   return data;
 };
-export { getAllBooksService, deleteBookService, deleteAllBooksService };
+// get book by id Function
+const getBookByIdService = async (id) => {
+  const { data } = await Axios.get(`/books/${id}`);
+  return data;
+};
+
+// review book Function
+const reviewBookService = async (token, id, review) => {
+  const { data } = await Axios.post(`/books/${id}/reviews`, review, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
+export {
+  getAllBooksService,
+  deleteBookService,
+  deleteAllBooksService,
+  getBookByIdService,
+  reviewBookService,
+};
