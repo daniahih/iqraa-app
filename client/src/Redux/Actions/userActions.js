@@ -139,7 +139,25 @@ const deleteUserAction = (id) => async (dispatch, getState) => {
     ErrorsAction(error, dispatch, userConstants.DELETE_USER_FAIL);
   }
 };
+// user like book movie action
 
+const likeBookAction = (bookId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_LIKE_BOOK_REQUEST });
+    const response = await userApi.likeBookService(
+      bookId,
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.USER_LIKE_BOOK_SUCCESS,
+      payload: response,
+    });
+    toast.success("book added to favorites ");
+    dispatch(getLikedBooksAction());
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.USER_LIKE_BOOK_FAIL);
+  }
+};
 export {
   LoginAction,
   registerAction,
@@ -151,4 +169,5 @@ export {
   deleteLikedBooksAction,
   deleteUserAction,
   getAllUsersAction,
+  likeBookAction,
 };

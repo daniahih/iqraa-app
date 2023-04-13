@@ -7,7 +7,7 @@ function BookInfo({ book }) {
         <div className="container  px-3  mx-auto 2xl:px-32 xl:grid  grid-cols-3 flex-colo py-10 lg:py-20 gap-8">
           <div className=" xl:col-span-1 w-full xl:order-none order-last h-90 bg-dry border border-border rounded-lg overflow-hidden  ">
             <img
-              src={`/imges/Books/${book.image}`}
+              src={`/imges/Books/${book?.image}`}
               alt={book.title}
               className="w-full h-full object-cover"
             />

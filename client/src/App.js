@@ -58,6 +58,10 @@ const Router = createBrowserRouter([
         path: "*",
         element: <NotFound />,
       },
+      {
+        path: "/books/:search",
+        element: <BooksPage />,
+      },
     ],
   },
   //private  routes

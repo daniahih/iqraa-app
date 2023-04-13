@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   userChangePassword: User.userChangePasswordReducer,
   userGetLikedBooks: User.userGetLikedBooksReducer,
   deleteLikedBooks: User.userDeleteLikedBooksReducer,
+  userLikeBook: User.userLikeBookReducer,
   getAllUsers: User.adminGetAllUsersReducer,
   deleteUser: User.adminDeleteUserReducer,
   // categories reducer

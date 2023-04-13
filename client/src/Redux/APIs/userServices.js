@@ -77,6 +77,15 @@ const deleteAllLikedBooksService = async (token) => {
   });
   return data;
 };
+// user like book Function
+const likeBookService = async (bookId, token) => {
+  const { data } = await Axios.post("/users/favourite", bookId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
 
 // admin get all users Function
 const getAllUsersService = async (token) => {
@@ -107,4 +116,5 @@ export {
   deleteAllLikedBooksService,
   getAllUsersService,
   deleteUserByIdService,
+  likeBookService,
 };

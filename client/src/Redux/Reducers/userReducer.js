@@ -103,6 +103,21 @@ export const userGetLikedBooksReducer = (
       return state;
   }
 };
+// USER LIKE Book
+export const userLikeBookReducer = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.USER_LIKE_BOOK_REQUEST:
+      return { isLoading: true };
+    case userConstants.USER_LIKE_BOOK_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case userConstants.USER_LIKE_BOOK_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.USER_LIKE_BOOK_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
 
 //  delete all favourite books
 export const userDeleteLikedBooksReducer = (state = {}, action) => {
