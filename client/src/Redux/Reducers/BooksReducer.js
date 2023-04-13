@@ -20,3 +20,32 @@ export const BooksListReducer = (state = { books: [] }, action) => {
       return state;
   }
 };
+
+// delete all books
+export const deleteBookReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BooksConstant.DELETE_BOOK_REQUEST:
+      return { isLoading: true };
+    case BooksConstant.DELETE_BOOK_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case BooksConstant.DELETE_BOOK_FAIL:
+      return { isLoading: false, isError: action.payload };
+    default:
+      return state;
+  }
+};
+
+// DELETE ALL MOVIES
+
+export const deleteAllBooksReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BooksConstant.DELETE_ALL_BOOKS_REQUEST:
+      return { isLoading: true };
+    case BooksConstant.DELETE_ALL_BOOKS_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case BooksConstant.DELETE_ALL_BOOKS_FAIL:
+      return { isLoading: false, isError: action.payload };
+    default:
+      return state;
+  }
+};

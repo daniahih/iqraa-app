@@ -49,6 +49,7 @@ function Profile() {
     }
     if (isSuccess) {
       dispatch({ type: "USER_UPDATE_PROFILE_RESET" });
+      toast("your profile info has been updated ");
     }
     if (isError || deleteError) {
       toast.error(isError || deleteError);

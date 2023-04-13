@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Head =
   "text-xs text-left  text-dryGray font-semibold  px-6 py-2 uppercase";
 const Text = "text-sm text-left leading-6 whitespace-nowrap px-5 py-3";
-const Rows = (book, i, admin) => {
+const Rows = (book, i, admin, onDeleteHandler) => {
   return (
     <tr key={i}>
       <td className={`${Text}`}>
@@ -21,6 +21,7 @@ const Rows = (book, i, admin) => {
       </td>
       <td className={`${Text}`}> {book.title}</td>
       <td className={`${Text}`}> {book.category}</td>
+      <td className={`${Text}`}> {book.emotion}</td>
       <td className={`${Text}`}> {book.language}</td>
       <td className={`${Text}`}> {book.Author}</td>
       <td className={`${Text} float-right flex-row gap-2 `}>
@@ -30,7 +31,10 @@ const Rows = (book, i, admin) => {
               <button className=" bg-star text-white rounded flex-colo w-6 h-6  ">
                 <AiFillEdit />
               </button>
-              <button className="bg-star text-white rounded flex-colo w-6 h-6 ">
+              <button
+                onClick={() => onDeleteHandler(book?._id)}
+                className="bg-star text-white rounded flex-colo w-6 h-6 "
+              >
                 <MdDelete />
               </button>
             </div>
@@ -54,7 +58,7 @@ const Rows = (book, i, admin) => {
     </tr>
   );
 };
-function Table({ data, admin }) {
+function Table({ data, admin, onDeleteHandler }) {
   return (
     <div className=" overflow-x-scroll overflow-hidden relative w-full ">
       <table className="w-full table-auto border border-border divide-y divide-border">
@@ -70,6 +74,9 @@ function Table({ data, admin }) {
               Category
             </th>
             <th scope="col" className={`${Head}`}>
+              Emotion
+            </th>
+            <th scope="col" className={`${Head}`}>
               Languge
             </th>
             <th scope="col" className={`${Head} `}>
@@ -78,7 +85,7 @@ function Table({ data, admin }) {
           </tr>
         </thead>
         <tbody className="bg-main divide-y divide-border ">
-          {data.map((book, i) => Rows(book, i, admin))}
+          {data.map((movie, i) => Rows(movie, i, admin, onDeleteHandler))}
         </tbody>
       </table>
     </div>

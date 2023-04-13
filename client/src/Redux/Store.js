@@ -28,6 +28,8 @@ const rootReducer = combineReducers({
   updateEmotion: Emotions.updateEmotionReducer,
   // bokks reducer
   booksList: Books.BooksListReducer,
+  deleteBook: Books.deleteBookReducer,
+  deleteAllBooks: Books.deleteAllBooksReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

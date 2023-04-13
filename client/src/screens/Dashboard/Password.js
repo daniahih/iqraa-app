@@ -34,7 +34,7 @@ function Password() {
   useEffect(() => {
     if (isSuccess) {
       dispatch({ type: "USER_CHANGE_PASSWORD_RESET" });
-      toast.success("your password has been changed");
+      toast("your password has been changed");
     }
     if (isError) {
       toast.error(isError);

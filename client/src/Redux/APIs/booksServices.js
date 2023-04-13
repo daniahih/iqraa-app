@@ -12,4 +12,24 @@ const getAllBooksService = async (
   );
   return data;
 };
-export { getAllBooksService };
+
+// delete book Function
+const deleteBookService = async (token, id) => {
+  const { data } = await Axios.delete(`/books/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
+// delete all books Function
+const deleteAllBooksService = async (token) => {
+  const { data } = await Axios.delete("/books", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+export { getAllBooksService, deleteBookService, deleteAllBooksService };
