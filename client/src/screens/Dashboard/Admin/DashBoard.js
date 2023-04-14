@@ -1,30 +1,73 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBar from "../SideBar";
 import { FaRegListAlt } from "react-icons/fa";
 import { HiViewGridAdd } from "react-icons/hi";
 import { FaUserAlt } from "react-icons/fa";
 import Table from "../../../components/Table";
-import { Books } from "../../../Data/BookData";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteBookAction,
+  getAllBooksAction,
+} from "../../../Redux/Actions/BooksActions";
+
+import { getAllCategories } from "../../../Redux/Actions/CategoriesActions";
+import { getAllUsersAction } from "../../../Redux/Actions/userActions";
+import { toast } from "react-hot-toast";
+import Loader from "../../../components/notifiations/Loader";
+import { Empty } from "../../../components/notifiations/Empty";
 
 function DashBoard() {
+  const dispatch = useDispatch();
+  // all books
+  const { isLoading, isError, books, totalBooks } = useSelector(
+    (state) => state.booksList
+  );
+  const {
+    isLoading: userLoading,
+    isError: userError,
+    users,
+  } = useSelector((state) => state.getAllUsers);
+  const { categories, isLoading: catLoading } = useSelector(
+    (state) => state.categoriesList
+  );
+
+  // delete book handler
+  const deleteBookHandler = (id) => {
+    window.confirm("Are you sure you want to delete this book?") &&
+      dispatch(deleteBookAction(id));
+  };
+
+  useEffect(() => {
+    // get all books
+    dispatch(getAllBooksAction({}));
+    // get all users
+    dispatch(getAllUsersAction());
+    // get all categories
+    dispatch(getAllCategories());
+    // errors
+    if (isError || userError) {
+      toast.error(isError || userError);
+    }
+  }, [dispatch, isError, userError]);
   const DashboardData = [
     {
       bg: "bg-orange-600",
       icon: FaRegListAlt,
       title: "Total Books",
-      total: 20,
+      total: isLoading ? "Loading.." : totalBooks || 0,
     },
     {
       bg: "bg-blue-600",
       icon: HiViewGridAdd,
       title: "Total Categories ",
-      total: 8,
+      total: catLoading ? "Loading.." : categories?.length || 0,
     },
     {
       bg: "bg-green-600",
       icon: FaUserAlt,
       title: "Total Users ",
-      total: 8,
+      total: userLoading ? "Loading.." : users?.length || 0,
     },
   ];
 
@@ -51,7 +94,17 @@ function DashBoard() {
           ))}
         </div>
         <h3 className="mt-6 text-md font-bold"> Reacent Book</h3>
-        <Table data={Books.slice(0, 5)} admin={true} />
+        {isLoading ? (
+          <Loader />
+        ) : books?.length > 0 ? (
+          <Table
+            data={books?.slice(0, 5)}
+            admin={true}
+            onDeleteHandler={deleteBookHandler}
+          />
+        ) : (
+          <Empty message="Empty" />
+        )}
       </SideBar>
     </div>
   );

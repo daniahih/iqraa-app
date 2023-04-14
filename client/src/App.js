@@ -22,6 +22,8 @@ import ToastContainer from "./components/notifiations/ToastContainer";
 import Emotion from "./screens/Dashboard/Admin/Emotion";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "./Redux/Actions/CategoriesActions";
+import { getLikedBooksAction } from "./Redux/Actions/userActions";
+import { toast } from "react-hot-toast";
 
 const Router = createBrowserRouter([
   {
@@ -107,10 +109,26 @@ const Router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const { isError, isSuccess } = useSelector((state) => state.userLikeBook);
+  const { isError: catError } = useSelector((state) => state.categoriesList);
+
   useEffect(() => {
     dispatch(getAllCategories());
-  }, [dispatch]);
 
+    if (userInfo) {
+      dispatch(getLikedBooksAction());
+    }
+
+    if (isError || catError) {
+      toast.error(isError || catError);
+      dispatch({ type: "USER_LIKE_BOOK_RESET" });
+    }
+
+    if (isSuccess) {
+      dispatch({ type: "USER_LIKE_BOOK_RESETT" });
+    }
+  }, [dispatch, userInfo, isError, isSuccess, catError]);
   return (
     <div>
       <ToastContainer />
