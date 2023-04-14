@@ -48,10 +48,21 @@ const reviewBookService = async (token, id, review) => {
   return data;
 };
 
+// create book Function
+const createBookService = async (token, book) => {
+  const { data } = await Axios.post("/books", book, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
 export {
   getAllBooksService,
   deleteBookService,
   deleteAllBooksService,
   getBookByIdService,
   reviewBookService,
+  createBookService,
 };

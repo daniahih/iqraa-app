@@ -1,28 +1,59 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { BsFillCloudUploadFill } from "react-icons/bs";
 
-function Update() {
-  const { getRootProps, getInputProps } = useDropzone({
-    multiple: false,
-    maxSize: 100000,
-    onDrop: (acceptedFiles) => {
-      alert(acceptedFiles[0].name);
+import { uploadImageServices } from "../Redux/APIs/ImageUploadServices";
+import Loader from "./notifiations/Loader";
+import { FiUploadCloud } from "react-icons/fi";
+
+function Update(setImageUrl) {
+  const [loading, setLoading] = useState(false);
+
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      const file = new FormData();
+      file.append("file", acceptedFiles[0]);
+      const data = await uploadImageServices(file, setLoading);
+      setImageUrl(data);
     },
-  });
+    [setImageUrl]
+  );
+
+  const { getRootProps, getInputProps, isDragActive, isDragReject } =
+    useDropzone({
+      onDrop,
+      multiple: false,
+    });
+
   return (
-    <div className="w-full text-center">
-      <div
-        {...getRootProps()}
-        className="px-6 pt-5 border-2 border-border border-dashed bg-main "
-      >
-        <input {...getInputProps()} />
-        <span className="mx-auto flex-colo text-star  text-3xl">
-          <BsFillCloudUploadFill />
-        </span>
-        <p className="text-sm mt-2">Drag your image here</p>
+    <>
+      <div className="w-full flex-colo gap-6 text-center ">
+        {loading ? (
+          <div className="px-6 w-full py-8 border-2 border-border border-dashed bg-dry rounded-md cursor-pointer">
+            <Loader />
+          </div>
+        ) : (
+          <div
+            {...getRootProps()}
+            className="px-6 w-full py-8 border-2 border-border border-dashed bg-dry rounded-md cursor-pointer"
+          >
+            <input {...getInputProps()} />
+            <span className="mx-auto flex-colo text-star text-3xl">
+              <FiUploadCloud />
+            </span>
+
+            <p className="text-sm mt-2">Drag your image here</p>
+
+            <em className="text-xs text-border">
+              {isDragActive
+                ? "Drop it like it's hot!"
+                : isDragReject
+                ? "Unsupported file type..."
+                : "Only *.jpeg and *.png images will be accepted"}
+            </em>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 }
 

@@ -98,3 +98,21 @@ export const reviewBookAction =
       ErrorsAction(error, dispatch, BooksConstant.BOOK_REVIEW_FAIL);
     }
   };
+
+// create book action
+export const createBookAction = (book) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: BooksConstant.CREATE_BOOK_REQUEST });
+    const response = await BooksApi.createBookService(
+      tokenProtection(getState),
+      book
+    );
+    dispatch({
+      type: BooksConstant.CREATE_BOOK_SUCCESS,
+      payload: response,
+    });
+    toast.success(`Book created successfully`);
+  } catch (error) {
+    ErrorsAction(error, dispatch, BooksConstant.CREATE_BOOK_FAIL);
+  }
+};

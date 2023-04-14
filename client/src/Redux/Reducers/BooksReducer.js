@@ -82,3 +82,20 @@ export const bookReviewReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// CREATE BOOK
+
+export const createBookReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BooksConstant.CREATE_BOOK_REQUEST:
+      return { isLoading: true };
+    case BooksConstant.CREATE_BOOK_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case BooksConstant.CREATE_BOOK_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case BooksConstant.CREATE_BOOK_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

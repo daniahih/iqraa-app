@@ -112,6 +112,7 @@ function App() {
   const { userInfo } = useSelector((state) => state.userLogin);
   const { isError, isSuccess } = useSelector((state) => state.userLikeBook);
   const { isError: catError } = useSelector((state) => state.categoriesList);
+  const { isError: emoError } = useSelector((state) => state.emotionList);
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -120,15 +121,15 @@ function App() {
       dispatch(getLikedBooksAction());
     }
 
-    if (isError || catError) {
-      toast.error(isError || catError);
+    if (isError || catError || emoError) {
+      toast.error(isError || catError || emoError);
       dispatch({ type: "USER_LIKE_BOOK_RESET" });
     }
 
     if (isSuccess) {
       dispatch({ type: "USER_LIKE_BOOK_RESETT" });
     }
-  }, [dispatch, userInfo, isError, isSuccess, catError]);
+  }, [dispatch, userInfo, isError, isSuccess, catError, emoError]);
   return (
     <div>
       <ToastContainer />
