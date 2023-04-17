@@ -4,8 +4,10 @@ import { BsCollectionFill } from "react-icons/bs";
 import Book from "../Book";
 import Loader from "../notifiations/Loader";
 import { Empty } from "../notifiations/Empty";
+import { useSelector } from "react-redux";
 
-function PopularBooks({ books, isLoading }) {
+function PopularBooks({ isLoading }) {
+  const { books } = useSelector((state) => state.booksList);
   return (
     <div className="my-16">
       <Titles title="Popular Books " Icon={BsCollectionFill} />
@@ -16,6 +18,7 @@ function PopularBooks({ books, isLoading }) {
           {books.slice(0, 8).map((book) => (
             <Book key={book?._id} book={book} />
           ))}
+          {console.log(books)}
         </div>
       ) : (
         <div className="mt-6">

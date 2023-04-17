@@ -18,16 +18,13 @@ function BooksPage() {
   );
   // get all categories
   const { categories } = useSelector((state) => state.categoriesList);
+  const { emotions } = useSelector((state) => state.emotionList);
 
   useEffect(() => {
     // errors
     if (isError) {
       toast.error(isError);
-      toast.error("theres a problem ");
     }
-
-    //get all books
-    dispatch(getAllBooksAction());
   }, [dispatch, isError]);
   // pagination function for next page and prev page
   const nextPage = () => {
@@ -48,7 +45,7 @@ function BooksPage() {
   return (
     <div className="bg-main font-bold text-white w-full h-full">
       <div className="min-height-screen container mx-auto px-2 my-6">
-        <Filters categories={categories} search={search} />
+        <Filters categories={categories} search={search} emotions={emotions} />
         <p className="text-lg font-meduim my-5  ">
           Total{" "}
           <span className="font-bold text-star">

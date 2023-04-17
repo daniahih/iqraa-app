@@ -6,7 +6,7 @@ export default function ToastContainer() {
       reverseOrder={false}
       gutter={8}
       toastOptions={{
-        duration: 2000,
+        duration: 3000,
       }}
     />
   );

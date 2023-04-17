@@ -8,6 +8,7 @@ export const getAllEmotions = () => async (dispatch) => {
   try {
     dispatch({ type: EmotionsConstants.GET_ALL_EMOTIONS_REQUEST });
     const response = await EmotionApi.getAllEmotionService();
+
     dispatch({
       type: EmotionsConstants.GET_ALL_EMOTIONS_SUCCESS,
       payload: response,

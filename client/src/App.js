@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "./Redux/Actions/CategoriesActions";
 import { getLikedBooksAction } from "./Redux/Actions/userActions";
 import { toast } from "react-hot-toast";
+import { getAllEmotions } from "./Redux/Actions/EmotionsActions";
 
 const Router = createBrowserRouter([
   {
@@ -64,47 +65,47 @@ const Router = createBrowserRouter([
         path: "/books/:search",
         element: <BooksPage />,
       },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/password",
+        element: <Password />,
+      },
+      {
+        path: "/favourite",
+        element: <FavouriteBooks />,
+      },
+      //admin route
+      {
+        path: "/bookslist",
+        element: <BooksList />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashBoard />,
+      },
+      {
+        path: "/categories",
+        element: <Categories />,
+      },
+
+      {
+        path: "/users",
+        element: <Users />,
+      },
+      {
+        path: "/addbook",
+        element: <AddBook />,
+      },
+      {
+        path: "/emotion",
+        element: <Emotion />,
+      },
     ],
   },
   //private  routes
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/password",
-    element: <Password />,
-  },
-  {
-    path: "/favourite",
-    element: <FavouriteBooks />,
-  },
-  //admin route
-  {
-    path: "/bookslist",
-    element: <BooksList />,
-  },
-  {
-    path: "/dashboard",
-    element: <DashBoard />,
-  },
-  {
-    path: "/categories",
-    element: <Categories />,
-  },
-
-  {
-    path: "/users",
-    element: <Users />,
-  },
-  {
-    path: "/addbook",
-    element: <AddBook />,
-  },
-  {
-    path: "/emotion",
-    element: <Emotion />,
-  },
 ]);
 
 function App() {
@@ -116,6 +117,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllCategories());
+    dispatch(getAllEmotions());
 
     if (userInfo) {
       dispatch(getLikedBooksAction());

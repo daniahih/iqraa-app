@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../SideBar";
 import { Input, Massage, Select } from "../../../components/UsedInput";
 import Update from "../../../components/Update";
-import { CategoriesData } from "../../../Data/CategoriesData";
+import { CloudinaryContext, Image } from "cloudinary-react";
+
 import { ImUpload } from "react-icons/im";
-import { emotionData } from "../../../Data/emotionData";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -17,9 +18,9 @@ import { toast } from "react-hot-toast";
 import { InlineError } from "../../../components/notifiations/Error";
 
 function AddBook() {
-  // const [imageWithoutTitle, setImageWithoutTitle] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState("");
 
   // get all categories and emotion
   const { categories } = useSelector((state) => state.categoriesList);
@@ -36,11 +37,11 @@ function AddBook() {
     resolver: yupResolver(BookValidation),
   });
 
-  // submit movie handler
   const onSubmit = (data) => {
     dispatch(
       createBookAction({
         ...data,
+        imageUrl: data.imageUrl,
       })
     );
     console.log("data", data);
@@ -114,12 +115,17 @@ function AddBook() {
               <InlineError message={errors.language.message} />
             )}
           </div>
-          {/* <div className="w-full grid md:grid-cols-2 gap-6 ">
-            <div className="flex flex-col gap-6 ">
-              <p>Uplode Image </p>
-              <Update setImageUrl={setImageWithoutTitle} />
-            </div>
-          </div> */}
+          <Input
+            label="Image URL"
+            placeholder="https://example.com/image.jpg"
+            type="text"
+            bg={true}
+            name="imageUrl"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            register={{ ...register("imageUrl") }}
+          />
+
           <Massage
             label="Book Summary"
             placeholder="make it short "

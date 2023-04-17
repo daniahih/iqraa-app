@@ -10,6 +10,7 @@ export const emotionsListReducer = (state = { emotions: [] }, action) => {
       return { isLoading: false, emotions: action.payload };
     case EmotionsConstants.GET_ALL_EMOTIONS_FAIL:
       return { isLoading: false, isError: action.payload };
+
     default:
       return state;
   }

@@ -4,28 +4,11 @@ import { SelectorIcon, CheckIcon } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
 import { getAllBooksAction } from "../Redux/Actions/BooksActions";
 
-const Emotion = [
-  { title: "Depressed" },
-  { title: "Curiosity" },
-  { title: "frustrated" },
-  { title: "nostalgia" },
-];
-
-const Rate = [
-  { title: "sort by Rate" },
-  { title: "1 start" },
-  { title: "2 start" },
-  { title: "3 start" },
-  { title: "4 start" },
-  { title: "5 start" },
-];
-
-function Filters({ categories, search }) {
+function Filters({ categories, search, emotions }) {
   const dispatch = useDispatch();
   const [category, setCategory] = useState({
     title: "All Categories",
   });
-  const [rate, setRate] = useState(Rate[0]);
   const [emotion, setEmotion] = useState({ title: " All emotions" });
 
   const FiltersData = [
@@ -42,38 +25,34 @@ function Filters({ categories, search }) {
             ]
           : [{ title: "Loading..." }],
     },
-    {
-      value: rate,
-      onChange: setRate,
-      items: Rate,
-    },
+
     {
       value: emotion,
       onChange: setEmotion,
       items:
-        Emotion?.length > 0
+        emotions?.length > 0
           ? [
               {
                 title: "All emotions",
               },
-              ...Emotion,
+              ...emotions,
             ]
           : [{ title: "Loading..." }],
     },
   ];
   useEffect(() => {
-    console.log(category, emotion, rate);
+    console.log(category, emotion);
     if (category?.title !== "Loading...") {
       dispatch(
         getAllBooksAction({
           category: category.title === "All Categories" ? "" : category.title,
           emotion: emotion.title === " All emotions" ? "" : emotion.title,
-          rate: rate.title.replace(/\D/g, ""),
+
           search: search ? search : "",
         })
       );
     }
-  }, [category, emotion, dispatch, rate, search]);
+  }, [category, emotion, dispatch, search]);
   return (
     <div className="my-6 bg-dry border text-dryGray border-gray-800 grid md:grid-cols-4 grid-col-2 lg:gap-12 gap-2 rounded p-6">
       {FiltersData.map((item, index) => (

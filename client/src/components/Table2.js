@@ -29,7 +29,7 @@ const Rows = ({ data, i, users, OnEditFunction, onDeleteFunction }) => {
           <td className={`${Text} float-right flex-rows gap-2`}>
             {!data?.isAdmin && (
               <button
-                onClick={() => onDeleteFunction(data._id)}
+              onClick={() => onDeleteFunction(data._id)}
                 className="bg-star text-white rounded flex-colo w-6 h-6"
               >
                 <MdDelete />
@@ -48,7 +48,7 @@ const Rows = ({ data, i, users, OnEditFunction, onDeleteFunction }) => {
           <td className={`${Text} float-right flex-row gap-2 `}>
             <div className="flex gap-2">
               <button
-                onClick={() => OnEditFunction(data)}
+                onClick={() => OnEditFunction(data._id)}
                 className=" bg-star text-white rounded flex-colo w-6 h-6  "
               >
                 <AiFillEdit />
@@ -105,7 +105,7 @@ function Table2({ data, users, OnEditFunction, onDeleteFunction }) {
             )}
           </tr>
         </thead>
-        <tbody className="bg-main divide-y divide-border ">
+        <tbody className="bg-main divide-y divide-gray-800">
           {data.map((data, i) => (
             <Rows
               data={data}
